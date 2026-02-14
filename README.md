@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Special</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    background: linear-gradient(to top right, #ff758c, #ff7eb3);
+}
+
+/* Background mawar bergerak */
+.rose {
+    position: fixed;
+    top: -50px;
+    font-size: 30px;
+    animation: roseFall linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes roseFall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Nama glow */
+.glow-name {
+    font-size: 45px;
+    margin-top: 30px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #ff4b6e; }
+    to { text-shadow: 0 0 20px #fff, 0 0 40px #ff1493; }
+}
+
+/* Foto */
+.photo img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 0 25px white;
+    margin-top: 20px;
+}
+
+/* Surat */
+#letter {
+    width: 80%;
+    max-width: 600px;
+    margin: 30px auto;
+    font-size: 20px;
+    min-height: 120px;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 20px;
+    background: rgba(255,255,255,0.2);
+}
+
+/* Tombol */
+button {
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background: white;
+    color: #ff4b6e;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff4b6e;
+    color: white;
+}
+
+/* Hati jatuh */
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: heartFall linear forwards;
+}
+
+@keyframes heartFall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="glow-name">
+    💖 Hanneydivln 💖
+</div>
+
+<div class="photo">
+    <!-- GANTI foto.jpg -->
+    <img src="hney.jpg" alt="hanney">
+</div>
+
+<div id="letter"></div>
+
+<button onclick="startLove()">Buka Semua Cinta 🌹🎵</button>
+
+<!-- GANTI lagu.mp3 -->
+<audio id="music" src="romantis.mp3" loop></audio>
+
+<script>
+// Mawar jatuh
+function createRose() {
+    const rose = document.createElement("div");
+    rose.classList.add("rose");
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(rose);
+    setTimeout(() => rose.remove(), 6000);
+}
+setInterval(createRose, 500);
+
+// Hati jatuh
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 400);
+
+// Surat efek ketik
+const text = "hanney ❤️\nSejak pertama kali melihatmu, aku selalu mengagumimu dalam diam caramu senyum,caramu berbicara,bahkan caramu peduli pada hal² kecil.\nHappy Valentine Day 🌹💕";
+let index = 0;
+
+function typeLetter() {
+    if (index < text.length) {
+        document.getElementById("letter").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeLetter, 50);
+    }
+}
+
+// Confetti
+function createConfetti() {
+    const colors = ["#ff0", "#0ff", "#f0f", "#0f0", "#fff"];
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+}
+
+// Start semua efek
+function startLove() {
+    document.getElementById("music").play();
+    typeLetter();
+    for (let i = 0; i < 120; i++) {
+        setTimeout(createConfetti, i * 20);
+    }
+}
+</script>
+
+</body>
+</html>
